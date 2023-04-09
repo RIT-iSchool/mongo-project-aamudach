@@ -93,3 +93,10 @@ wsproto==1.2.0
 zict==2.2.0
 zipp==3.15.0
 zstandard==0.19.0
+
+# flask requirements
+Flask==2.1.0
+pymongo==3.12.0
+geopy==2.2.0
+bson==0.5.10
+opencage==1.2.2
