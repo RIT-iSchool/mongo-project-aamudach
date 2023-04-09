@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ business.business_name }}</title>
+</head>
+<body>
+    <h1>{{ business.business_name }}</h1>
+    <p>{{ business.address }}</p>
+    <h2>Hours</h2>
+    <table>
+        <tr>
+            <th>Day</th>
+            <th>Hours</th>
+        </tr>
+        {% for day, hours in business.hours %}
+        <tr>
+            <td>{{ day }}</td>
+            <td>{{ hours }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Reviews</h2>
+    {% if business.reviews %}
+    <ul>
+        {% for review in business.reviews %}
+        <li>
+            <p><strong>{{ review.user_name }}</strong> - {{ review.rating }} stars</p>
+            <p>{{ review.text }}</p>
+            {% if review.pics %}
+            <div>
+                {% for pic in review.pics %}
+                <img src="{{ pic.url[0] }}" alt="Review Picture">
+                {% endfor %}
+            </div>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No reviews yet.</p>
+    {% endif %}
+</body>
+</html>
