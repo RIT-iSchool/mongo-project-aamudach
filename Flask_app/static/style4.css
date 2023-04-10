@@ -1,0 +1,160 @@
+/* Global Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background-color: #f8f8f8;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 20px;
+  }
+  
+  a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  h1, h2, h3 {
+    margin: 10px 0;
+  }
+  
+  /* Header Styles */
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+  header img {
+    max-height: 80px;
+  }
+  
+  header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  header nav li {
+    font-size: 18px;
+  }
+  
+  header nav li:last-child {
+    margin-right: 0;
+  }
+  
+  /* Business Info Styles */
+  
+  .business-info {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+  
+  .business-info h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .business-info p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .business-info h2 {
+    margin: 20px 0;
+    font-size: 24px;
+  }
+  
+  .business-info table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .business-info th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .business-info td {
+    padding: 10px;
+  }
+  
+  .business-info ul {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  
+  .business-info li {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+  }
+  
+  .business-info li:last-child {
+    border-bottom: none;
+  }
+  
+  .business-info li p {
+    margin-bottom: 10px;
+  }
+  
+  .business-info li strong {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .business-info li img {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive Styles */
+  
+  @media only screen and (max-width: 600px) {
+    header {
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+  
+    header img {
+      max-height: 50px;
+    }
+  
+    header nav {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    .business-info h1 {
+      font-size: 24px;
+    }
+  
+    .business-info p {
+      font-size: 16px;
+    }
+  
+    .business-info h2 {
+      font-size: 20px;
+    }
+  
+    .business-info li strong {
+      font-size: 16px;
+    }
+  }
+  
