@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
 </head>
 <body>
     <h1>Search Results</h1>
-    <table>
+    <table class="search-results">
         <thead>
             <tr>
                 <th>Business Name</th>
@@ -17,12 +18,19 @@
         <tbody>
             {% for result in results %}
             <tr>
-                <td><a href="/business/{{ result['business_name'] }}">{{ result['business_name'] }}</a></td>
-                <td><a href="/business/{{ result['id'] }}/address">{{ result['address'] }}</a></td>
+                <td><a href="/business/{{ result['business_id'] }}">{{ result['business_name'] }}</a></td>
+                <td>{{ result['address'] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{{ url_for('index') }}">Back to Homepage</a>
+    <h2>Search New Business</h2>
+    <form method="POST">
+        <label for="business-name">Business Name:</label>
+        <input type="text" id="business-name" name="business-name" required>
+        <br>
+        <button type="submit">Search</button>
+    </form>
+    <a href="{{ url_for('index') }}" class="back-link">Back to Homepage</a>
 </body>
 </html>

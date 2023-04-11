@@ -6,6 +6,9 @@ from bson.son import SON
 from geopy.geocoders import GoogleV3
 from opencage.geocoder import OpenCageGeocode
 from urllib.parse import quote
+from gridfs import GridFS
+from bson import ObjectId
+import base64
 
 app = Flask(__name__)
 
@@ -14,6 +17,9 @@ try:
     client = pymongo.MongoClient("localhost:27017")
     db = client['project']
     collection = db['businesses']
+    fs_files = db['fs.files']
+    fs_chunks = db['fs.chunks']
+    grid_fs = GridFS(db)
 except PyMongoError as e:
     print(f"Error connecting to MongoDB: {e}")
 
@@ -40,7 +46,7 @@ def search_location():
             'location': {
                 '$near': {
                     '$geometry': {
-                        'type': "Point",
+                        'type':"Point",
                         'coordinates': [longitude, latitude]
                     },
                     '$maxDistance': distance
@@ -110,8 +116,8 @@ def search_business():
     if request.method == 'POST':
         business_name = request.form['business-name']
 
-        results = collection.find(
-            {"business_name": {"$regex": business_name, "$options": "i"}})
+        
+        results = collection.find({"business_name": {"$regex": f"\\b{business_name}\\w*\\b", "$options": "i"}})
 
         search_results = []
         for result in results:
@@ -121,23 +127,29 @@ def search_business():
             address = result['address']
             #image_url = result['image_url']
 
-            search_results.append(
-                {'business_name': result['business_name'], 'latitude': lat, 'longitude': lng, 'address': address})
+            
+            search_results.append({'business_name': result['business_name'], 'latitude': lat, 'longitude': lng, 'address': address, 'business_id':result['business_id']})
 
         return render_template('search_results.html', results=search_results)
     return render_template('search_business.html')
 
-
-@app.route('/business/<business_name>')
-def business_page(business_name):
-    # Query the database for the business document with the matching business_name
-    my_string = business_name
-    business_name = my_string.replace("%20", " ")
-    business = collection.find_one({'business_name': business_name})
-
+@app.route('/business/<business_id>')
+def business_page(business_id):
+    # Query the database for the business document with the matching business_id
+    business = collection.find_one({'business_id': business_id})
     if business:
         # Render the business page template with the business data
-        return render_template('business.html', business=business)
+        if 'image_id' in business:
+            try:
+                image_id = ObjectId(business['image_id'])
+                image_file = grid_fs.get(image_id).read()
+                image_base64 = base64.b64encode(image_file).decode('utf-8')
+            except:
+                # Handle the case where the image is not found
+                image_base64 = None
+        else:
+            image_base64 = None   
+        return render_template('business.html', business=business, image_base64 = image_base64)
     else:
         # If the business isn't found, return a 404 error
         abort(404)
