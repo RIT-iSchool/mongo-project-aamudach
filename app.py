@@ -58,6 +58,10 @@ def search_location():
             }
         })
 
+        if len(list(results)) == 0:
+            message = "No locations found. Please try again with different search location/criteria."
+            return render_template('search_results.html', message=message)
+
         return render_template('search_results.html', results=results)
     return render_template('search_location.html')
 
