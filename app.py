@@ -1,16 +1,11 @@
 from pymongo.errors import PyMongoError
-from flask import Flask, render_template, request, redirect, url_for
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, abort
 import pymongo
 from geopy.distance import geodesic
 from bson.son import SON
 from geopy.geocoders import GoogleV3
-from geopy.distance import geodesic
 from opencage.geocoder import OpenCageGeocode
-from flask import Flask, render_template, abort
-from flask import Flask, render_template, url_for
 from urllib.parse import quote
-
 
 app = Flask(__name__)
 
