@@ -59,10 +59,10 @@ def search_location():
         })
 
         if len(list(results)) == 0:
-            message = "No locations found. Please try again with different search location/criteria."
-            return render_template('search_results.html', message=message)
+            message = "No Businesses found. Please try again with different search location/criteria."
+            return render_template('search_results_l.html', message=message)
 
-        return render_template('search_results.html', results=results)
+        return render_template('search_results_l.html', results=results)
     return render_template('search_location.html')
 
 
@@ -114,10 +114,13 @@ def search_by_address():
 
                 search_results.append({'business_name': result['business_name'], 'latitude': lat, 'longitude': lng,
                                       'address': address, 'avg_rating': avg_rating, 'business_id': result['business_id']})
+                
+                if len(search_results) == 0:
+                    message = "No Businesses found. Please try again with different search address/criteria."
+                    return render_template('search_results_a.html', message=message)
 
-            return render_template('search_results.html', results=search_results)
+            return render_template('search_results_a.html', results=search_results)
         else:
-
             return render_template('search_by_address.html', error='Location not found')
 
     return render_template('search_by_address.html')
@@ -130,7 +133,7 @@ def search_business():
 
         results = collection.find(
             {"business_name": {"$regex": f"\\b{business_name}\\w*\\b", "$options": "i"}})
-
+        
         search_results = []
         for result in results:
 
@@ -141,8 +144,12 @@ def search_business():
 
             search_results.append({'business_name': result['business_name'], 'latitude': lat,
                                   'longitude': lng, 'address': address, 'business_id': result['business_id']})
+            
+        if len(search_results) == 0:
+            message = "No businesses found. Please try again with different business name."
+            return render_template('search_results_b.html', message=message)
 
-        return render_template('search_results.html', results=search_results)
+        return render_template('search_results_b.html', results=search_results)
     return render_template('search_business.html')
 
 
