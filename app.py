@@ -46,7 +46,7 @@ def search_location():
             'location': {
                 '$near': {
                     '$geometry': {
-                        'type':"Point",
+                        'type': "Point",
                         'coordinates': [longitude, latitude]
                     },
                     '$maxDistance': distance
@@ -92,9 +92,9 @@ def search_by_address():
                         '$maxDistance': distance
                     }
                 },
-            'avg_rating': {
-                '$gte': avg_rating
-            }
+                'avg_rating': {
+                    '$gte': avg_rating
+                }
             })
 
             search_results = []
@@ -106,8 +106,8 @@ def search_by_address():
                 avg_rating = result['avg_rating']
                 #image_url = result['image_url']
 
-                
-                search_results.append({'business_name': result['business_name'], 'latitude': lat, 'longitude': lng, 'address': address, 'avg_rating':avg_rating})
+                search_results.append(
+                    {'business_name': result['business_name'], 'latitude': lat, 'longitude': lng, 'address': address, 'avg_rating': avg_rating})
 
             return render_template('search_results.html', results=search_results)
         else:
@@ -122,8 +122,8 @@ def search_business():
     if request.method == 'POST':
         business_name = request.form['business-name']
 
-        
-        results = collection.find({"business_name": {"$regex": f"\\b{business_name}\\w*\\b", "$options": "i"}})
+        results = collection.find(
+            {"business_name": {"$regex": f"\\b{business_name}\\w*\\b", "$options": "i"}})
 
         search_results = []
         for result in results:
@@ -133,11 +133,12 @@ def search_business():
             address = result['address']
             #image_url = result['image_url']
 
-            
-            search_results.append({'business_name': result['business_name'], 'latitude': lat, 'longitude': lng, 'address': address, 'business_id':result['business_id']})
+            search_results.append({'business_name': result['business_name'], 'latitude': lat,
+                                  'longitude': lng, 'address': address, 'business_id': result['business_id']})
 
         return render_template('search_results.html', results=search_results)
     return render_template('search_business.html')
+
 
 @app.route('/business/<business_id>')
 def business_page(business_id):
@@ -154,11 +155,33 @@ def business_page(business_id):
                 # Handle the case where the image is not found
                 image_base64 = None
         else:
-            image_base64 = None   
-        return render_template('business.html', business=business, image_base64 = image_base64)
+            image_base64 = None
+        comments = business.get('comments', [])
+
+        return render_template('business.html', business=business, image_base64=image_base64, comments=comments)
     else:
         # If the business isn't found, return a 404 error
         abort(404)
+
+
+@app.route('/business/<business_id>/submit_comment', methods=['POST'])
+def submit_comment(business_id):
+    # Get form data
+    user_name = request.form['user_name']
+    comment_text = request.form['comment_text']
+
+    # Create a comment document
+    comment = {
+        'user_name': user_name,
+        'comment_text': comment_text
+    }
+
+    # Add the comment to the business' comments array
+    collection.update_one({'business_id': business_id}, {
+                          '$push': {'comments': comment}})
+
+    # Redirect back to the business page
+    return redirect(url_for('business_page', business_id=business_id))
 
 
 if __name__ == '__main__':
