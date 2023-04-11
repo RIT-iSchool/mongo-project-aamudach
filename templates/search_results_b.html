@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
+</head>
+
+<body>
+    <h1>Search Results</h1>
+    <form method="POST" style="text-align: center;">
+        <label for="business-name" style="display: inline-block;">Business Name:</label>
+        <input type="text" id="business-name" name="business-name" required style="display: inline-block;">
+        <button type="submit" style="display: inline-block;">Search</button>
+    </form>
+    <br>     
+    {% if message %}
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <img src="static/nobus.png" alt="No Business found">
+        <p style="text-align: center;">{{ message }}</p>
+    </div>
+    {% else %}
+    <table class="search-results">
+        <thead>
+            <tr>
+                <th>Business Name</th>
+                <th>Address</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td><a href="/business/{{ result['business_id'] }}">{{ result['business_name'] }}</a></td>
+                <td>{{ result['address'] }}</td>
+               
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    <a href="{{ url_for('index') }}" class="back-link" style="position: absolute; top: 0; left: 0;">Back to Homepage</a>
+</body>
+
+</html>

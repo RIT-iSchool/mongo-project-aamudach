@@ -1,0 +1,92 @@
+/* Style sheet for the search_by_address page */
+
+/* Styles for the page title */
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* Styles for the form */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2em;
+  padding: 2em;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the form label */
+label {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+/* Styles for the form input */
+input[type="text"] {
+  padding: 0.5em;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  background-color: #e0e0e0;
+  margin-bottom: 1em;
+  width: 100%;
+  max-width: 400px;
+}
+
+input[type="number"] {
+  padding: 0.5em;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  background-color: #e0e0e0;
+  margin-bottom: 1em;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Styles for the form button */
+button[type="submit"] {
+  padding: 0.5em;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+  max-width: 400px;
+}
+
+button[type="submit"]:hover {
+  background-color: #555;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Styles for the body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+a {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  color: #2c3e50;
+  font-size: 1.2em;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

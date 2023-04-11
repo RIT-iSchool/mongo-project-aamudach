@@ -1,0 +1,164 @@
+/* Style sheet for business.html */
+
+/* Global Styles */
+
+/* Set the font family and background color for the entire page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  }
+  
+  /* Style the business name */
+  h1 {
+  font-size: 36px;
+  text-align: center;
+  margin-top: 30px;
+  }
+  
+  /* Style the business address */
+  p {
+  font-size: 18px;
+  text-align: center;
+  }
+  
+  /* Style the hours table */
+  table {
+  border-collapse: collapse;
+  margin: 20px auto;
+  width: 80%;
+  }
+  
+  th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+  background-color: #f2f2f2;
+  }
+  
+  /* Style the reviews and comments */
+  h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 50px;
+  }
+  
+  ul {
+  list-style-type: none;
+  margin: 20px;
+  padding: 0;
+  }
+  
+  li {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px #ccc;
+  }
+  
+  .review-rating {
+  font-size: 18px;
+  margin-bottom: 10px;
+  }
+  
+  .review-text, .comment-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+  }
+  
+  .review-pics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  }
+  
+  .review-pic, .comment-pic {
+  margin: 10px;
+  max-width: 200px;
+  max-height: 200px;
+  }
+  
+  /* Center the business image /
+  img[src='data:image/jpeg;base64'] {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  }
+  
+  /* Style the comment form */
+  form {
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px #ccc;
+  }
+  
+  label {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 10px;
+  }
+  
+  input[type="text"], textarea {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  width: 100%;
+  margin-bottom: 20px;
+  }
+  
+  button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+  background-color: #3e8e41;
+  }
+  
+  /* Center the search bar and back link */
+  .search-bar, .back-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px #ccc;
+  }
+  
+  .search-bar form {
+  margin: 0;
+  }
+  
+  .search-bar input[type="text"] {
+  margin-right: 10px;
+  width: 80%;
+  }
+  
+  .search-bar button[type="submit"] {
+  width: 15%;
+  }
+  
+  .back-link {
+  text-align: right;
+  }
+
+  a {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: #2c3e50;
+    font-size: 1.2em;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }

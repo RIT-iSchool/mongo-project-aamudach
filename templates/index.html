@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Welcome to Our Business Search Engine</h1>
+    <div class="options">
+        <a href="{{ url_for('search_location') }}">Search by Location</a>
+        <a href="{{ url_for('search_business') }}">Search by Business Name</a>
+        <a href="{{ url_for('search_by_address') }}">Search by Address</a>
+    </div>
+</body>
+
+</html>
