@@ -15,6 +15,7 @@
     <img src="data:image/jpeg;base64,{{ image_base64 }}" alt="Business Image">
     {% endif %}
     <h2>Hours</h2>
+    {% if business.hours %}
     <table>
         <tr>
             <th>Day</th>
@@ -27,6 +28,9 @@
         </tr>
         {% endfor %}
     </table>
+    {% else %}
+    <p>No hours listed.</p>
+    {% endif %}
     <h2>Reviews</h2>
     {% if business.reviews %}
     <ul>
