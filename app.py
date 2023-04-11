@@ -40,20 +40,24 @@ def search_location():
 
         latitude = float(latitude)
         longitude = float(longitude)
-        distance = float(distance)
+        distance = float(distance)*1000
         avg_rating = float(avg_rating)
 
-        results = collection.find({
-            'location': {
-                '$geoWithin': {
-                    '$centerSphere': [[longitude, latitude], distance / 6378.1]
-                    }
+        results = collection.aggregate([
+            {
+                '$geoNear': {
+                    'near': {'type': 'Point', 'coordinates': [longitude, latitude]},
+                    'distanceField': 'distance',
+                    'spherical': True,
+                    'maxDistance': distance,
+                    'query': {'avg_rating': {'$gte': avg_rating}}
+                }
             },
-            'avg_rating': {
-                '$gte': avg_rating
+            {
+                '$sort': {'distance': 1}
             }
-        })
-
+        ])
+    
         search_results = []
         for result in results:
 
@@ -93,19 +97,23 @@ def search_by_address():
             latitude = results[0]['geometry']['lat']
             longitude = results[0]['geometry']['lng']
 
-            distance = float(distance)
+            distance = float(distance)*1000
             avg_rating = float(avg_rating)
 
-            results = collection.find({
-                'location': {
-                '$geoWithin': {
-                    '$centerSphere': [[longitude, latitude], distance / 6378.1]
+            results = collection.aggregate([
+                {
+                    '$geoNear': {
+                        'near': {'type': 'Point', 'coordinates': [longitude, latitude]},
+                        'distanceField': 'distance',
+                        'spherical': True,
+                        'maxDistance': distance,
+                        'query': {'avg_rating': {'$gte': avg_rating}}
                     }
                 },
-                'avg_rating': {
-                    '$gte': avg_rating
+                {
+                    '$sort': {'distance': 1}
                 }
-            })
+            ])
 
             search_results = []
             for result in results:
