@@ -70,6 +70,7 @@ def search_by_address():
 
         address = request.form['address']
         distance = request.form['distance']
+        avg_rating = request.form['avg_rating']
 
         geocoder = OpenCageGeocode(app.config['OPENCAGE_API_KEY'])
         results = geocoder.geocode(address)
@@ -79,6 +80,7 @@ def search_by_address():
             longitude = results[0]['geometry']['lng']
 
             distance = float(distance)
+            avg_rating = float(avg_rating)
 
             results = collection.find({
                 'location': {
@@ -89,7 +91,10 @@ def search_by_address():
                         },
                         '$maxDistance': distance
                     }
-                }
+                },
+            'avg_rating': {
+                '$gte': avg_rating
+            }
             })
 
             search_results = []
@@ -98,10 +103,11 @@ def search_by_address():
                 lat = result['location']['coordinates'][1]
                 lng = result['location']['coordinates'][0]
                 address = result['address']
+                avg_rating = result['avg_rating']
                 #image_url = result['image_url']
 
-                search_results.append(
-                    {'business_name': result['business_name'], 'latitude': lat, 'longitude': lng, 'address': address})
+                
+                search_results.append({'business_name': result['business_name'], 'latitude': lat, 'longitude': lng, 'address': address, 'avg_rating':avg_rating})
 
             return render_template('search_results.html', results=search_results)
         else:
