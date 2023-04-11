@@ -45,9 +45,13 @@ def search_location():
 
         results = collection.find({
             'location': {
-                '$geoWithin': {
-                    '$centerSphere': [[longitude, latitude], distance / 6378.1]
-                    }
+                '$near': {
+                    '$geometry': {
+                        'type':"Point",
+                        'coordinates':[longitude, latitude]
+                    },
+                    '$maxDistance': distance
+                }
             },
             'avg_rating': {
                 '$gte': avg_rating
@@ -99,15 +103,19 @@ def search_by_address():
             avg_rating = float(avg_rating)
 
             results = collection.find({
-                'location': {
-                '$geoWithin': {
-                    '$centerSphere': [[longitude, latitude], distance / 6378.1]
-                    }
-                },
-                'avg_rating': {
-                    '$gte': avg_rating
+            'location': {
+                '$near': {
+                    '$geometry': {
+                        'type':"Point",
+                        'coordinates':[longitude, latitude]
+                    },
+                    '$maxDistance': distance
                 }
-            })
+            },
+            'avg_rating': {
+                '$gte': avg_rating
+            }
+        })
 
             search_results = []
             for result in results:

@@ -149,3 +149,16 @@ body {
   .back-link {
   text-align: right;
   }
+
+  a {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: #2c3e50;
+    font-size: 1.2em;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
