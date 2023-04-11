@@ -34,8 +34,9 @@
             <input type="number" id="avg_rating" name="avg_rating" min="0" max="5" step="0.1" required>
         </div>
         <button type="submit">Search</button>
+        <br>
+        <a href="{{ url_for('index') }}" class="back-link">Back to Homepage</a>
     </form>
-    <a href="{{ url_for('index') }}">Back to Homepage</a>
 
     <!-- Add JavaScript code to load the map and handle click events -->
     <script>
