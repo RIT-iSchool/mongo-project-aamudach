@@ -11,6 +11,7 @@
 <body>
     <h1>{{ business.business_name }}</h1>
     <p>{{ business.address }}</p>
+    <p>Average Rating - {{ business.avg_rating }}</p>
     {% if image_base64 %}
     <img src="data:image/jpeg;base64,{{ image_base64 }}" alt="Business Image" style="display: block; margin: auto; width: 25%; height: 25%;">
     {% endif %}

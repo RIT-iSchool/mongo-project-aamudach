@@ -27,6 +27,7 @@
             <tr>
                 <th>Business Name</th>
                 <th>Address</th>
+
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@
             <tr>
                 <td><a href="/business/{{ result['business_id'] }}">{{ result['business_name'] }}</a></td>
                 <td>{{ result['address'] }}</td>
+               
             </tr>
             {% endfor %}
         </tbody>
