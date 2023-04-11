@@ -14,12 +14,13 @@ app = Flask(__name__)
 
 
 try:
-    client = pymongo.MongoClient("localhost:27017")
+    client = pymongo.MongoClient("mongodb://localhost:27017")
     db = client['project']
     collection = db['businesses']
     fs_files = db['fs.files']
     fs_chunks = db['fs.chunks']
     grid_fs = GridFS(db)
+    collection.create_index([('location', pymongo.GEOSPHERE)])
 except PyMongoError as e:
     print(f"Error connecting to MongoDB: {e}")
 
@@ -104,10 +105,11 @@ def search_by_address():
                 lng = result['location']['coordinates'][0]
                 address = result['address']
                 avg_rating = result['avg_rating']
+                business_id = result['business_id']
                 #image_url = result['image_url']
 
-                search_results.append(
-                    {'business_name': result['business_name'], 'latitude': lat, 'longitude': lng, 'address': address, 'avg_rating': avg_rating})
+                search_results.append({'business_name': result['business_name'], 'latitude': lat, 'longitude': lng,
+                                      'address': address, 'avg_rating': avg_rating, 'business_id': result['business_id']})
 
             return render_template('search_results.html', results=search_results)
         else:
