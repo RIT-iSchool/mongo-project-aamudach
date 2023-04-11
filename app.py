@@ -57,16 +57,31 @@ def search_location():
                 '$gte': avg_rating
             }
         })
+        
+        search_results = []
 
-        if len(list(results)) == 0:
-            message = "No Businesses found. Please try again with different search location/criteria."
-            return render_template('search_results_l.html', message=message)
+        if results:
+            for result in results:
 
-        return render_template('search_results_l.html', results=results)
+                lat = result['location']['coordinates'][1]
+                lng = result['location']['coordinates'][0]
+                address = result['address']
+                avg_rating = result['avg_rating']
+                business_id = result['business_id']
+                #image_url = result['image_url']
+
+                search_results.append({'business_name': result['business_name'], 'latitude': lat, 'longitude': lng,
+                                      'address': address, 'avg_rating': avg_rating, 'business_id': result['business_id']})
+                
+                if len(search_results) == 0:
+                    message = "No Businesses found. Please try again with different search address/criteria."
+                    return render_template('search_results_l.html', message=message)
+                    
+        return render_template('search_results_l.html', results=search_results)
     return render_template('search_location.html')
 
 
-app.config['OPENCAGE_API_KEY'] = '2075d13a74c74ce6966b09b239d52c8d'
+app.config['OPENCAGE_API_KEY'] = '53e5502771ec4437aab8f4f3f7b86096'
 
 
 @app.route('/search_by_address', methods=['GET', 'POST'])
@@ -120,8 +135,6 @@ def search_by_address():
                 return render_template('search_results_a.html', message=message)
 
             return render_template('search_results_a.html', results=search_results)
-        else:
-            return render_template('search_by_address.html', error='Location not found')
 
     return render_template('search_by_address.html')
 
