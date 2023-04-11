@@ -12,7 +12,7 @@
     <h1>{{ business.business_name }}</h1>
     <p>{{ business.address }}</p>
     {% if image_base64 %}
-    <img src="data:image/jpeg;base64,{{ image_base64 }}" alt="Business Image">
+    <img src="data:image/jpeg;base64,{{ image_base64 }}" alt="Business Image" style="display: block; margin: auto; width: 25%; height: 25%;">
     {% endif %}
     <h2>Hours</h2>
     {% if business.hours %}
@@ -67,12 +67,12 @@
     <h2>Submit a Comment</h2>
     <form action="{{ url_for('submit_comment', business_id=business.business_id) }}" method="post">
         <label for="user_name">Name:</label>
-        <input type="text" id="user_name" name="user_name" required>
+        <input type="text" id="user_name" name="user_name" style="width: 98%;" required>
         <br>
         <label for="comment_text">Comment:</label>
-        <textarea id="comment_text" name="comment_text" rows="4" required></textarea>
+        <textarea id="comment_text" name="comment_text" rows="4" style="width: 98%;" required></textarea>
         <br>
-        <button type="submit">Submit</button>
+        <button type="submit" style="display: block; margin: auto;">Submit</button>
     </form>
 </body>
 

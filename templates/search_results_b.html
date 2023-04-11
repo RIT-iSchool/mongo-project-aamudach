@@ -10,6 +10,18 @@
 
 <body>
     <h1>Search Results</h1>
+    <form method="POST" style="text-align: center;">
+        <label for="business-name" style="display: inline-block;">Business Name:</label>
+        <input type="text" id="business-name" name="business-name" required style="display: inline-block;">
+        <button type="submit" style="display: inline-block;">Search</button>
+    </form>
+    <br>     
+    {% if message %}
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <img src="static/nobus.png" alt="No Business found">
+        <p style="text-align: center;">{{ message }}</p>
+    </div>
+    {% else %}
     <table class="search-results">
         <thead>
             <tr>
@@ -26,14 +38,8 @@
             {% endfor %}
         </tbody>
     </table>
-    <h2>Search New Business</h2>
-    <form method="POST">
-        <label for="business-name">Business Name:</label>
-        <input type="text" id="business-name" name="business-name" required>
-        <br>
-        <button type="submit">Search</button>
-    </form>
-    <a href="{{ url_for('index') }}" class="back-link">Back to Homepage</a>
+    {% endif %}
+    <a href="{{ url_for('index') }}" class="back-link" style="position: absolute; top: 0; left: 0;">Back to Homepage</a>
 </body>
 
 </html>
