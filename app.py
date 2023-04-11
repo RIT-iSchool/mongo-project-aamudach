@@ -53,11 +53,9 @@ def search_location():
                 '$gte': avg_rating
             }
         })
-        
-        search_results = []
 
-        if results:
-            for result in results:
+        search_results = []
+        for result in results:
 
                 lat = result['location']['coordinates'][1]
                 lng = result['location']['coordinates'][0]
@@ -69,10 +67,10 @@ def search_location():
                 search_results.append({'business_name': result['business_name'], 'latitude': lat, 'longitude': lng,
                                       'address': address, 'avg_rating': avg_rating, 'business_id': result['business_id']})
                 
-                if len(search_results) == 0:
-                    message = "No Businesses found. Please try again with different search address/criteria."
-                    return render_template('search_results_l.html', message=message)
-                    
+        if len(search_results) == 0:
+            message = "No Businesses found. Please try again with different search location/criteria."
+            return render_template('search_results_l.html', message=message)
+
         return render_template('search_results_l.html', results=search_results)
     return render_template('search_location.html')
 
