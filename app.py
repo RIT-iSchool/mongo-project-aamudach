@@ -115,9 +115,9 @@ def search_by_address():
                 search_results.append({'business_name': result['business_name'], 'latitude': lat, 'longitude': lng,
                                       'address': address, 'avg_rating': avg_rating, 'business_id': result['business_id']})
                 
-                if len(search_results) == 0:
-                    message = "No Businesses found. Please try again with different search address/criteria."
-                    return render_template('search_results_a.html', message=message)
+            if len(search_results) == 0:
+                message = "No Businesses found. Please try again with different search address/criteria."
+                return render_template('search_results_a.html', message=message)
 
             return render_template('search_results_a.html', results=search_results)
         else:
