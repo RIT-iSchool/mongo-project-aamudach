@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Search by Address</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style6.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style6.css') }}">
 </head>
+
 <body>
 	<h1>Search by Address</h1>
 	<form method="post" action="{{ url_for('search_by_address') }}">
@@ -16,4 +18,5 @@
 		<input type="submit" value="Submit">
 	</form>
 </body>
+
 </html>
