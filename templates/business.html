@@ -64,7 +64,6 @@
     {% else %}
     <p>No comments yet.</p>
     {% endif %}
-    <!-- Add this section after the Reviews section in business.html -->
     <h2>Submit a Comment</h2>
     <form action="{{ url_for('submit_comment', business_id=business.business_id) }}" method="post">
         <label for="user_name">Name:</label>
@@ -76,4 +75,5 @@
         <button type="submit">Submit</button>
     </form>
 </body>
+
 </html>
